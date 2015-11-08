@@ -12,9 +12,7 @@ long[] EMGarray = new long[4];
 int check; //variables to set note duration
 int timer = 0;
 boolean foo = true;
-boolean boo = false;
 int count = 0;
-float prevY;
 
 void setup()
 {
@@ -34,7 +32,7 @@ void draw()
   String msg; //variables for EMG
   long nummsg;
   long clampedmsg; //final EMG values, from 0, ~480
-  float duration = random(100,1500); //of note, in ms 
+  float duration = 1500; //of note, in ms 
   
   count += 1;
   try 
@@ -51,20 +49,9 @@ void draw()
           }
           
           EMGarray[0]=clampedmsg;
-          println(EMGarray);
+          //println(EMGarray);
           
-          //calculating slope of the spike
-          float slope = EMGarray[0]-EMGarray[3];
-          
-          float a = EMGarray[0]-EMGarray[1];
-          float b = EMGarray[1]-EMGarray[2];
-          float c = EMGarray[2]-EMGarray[3];
-          
-          float[] ppp = {60, a, b, b};
-          
-          if(slope>100){ //if there's a large slope
-            sc.playChord(ppp, 100, 2.0);
-          }
+
 
 //              float plotVar = clampedmsg;
 //              stroke(255,0,0);
@@ -81,6 +68,24 @@ void draw()
                       
           //CODE TO PLAY SOUNDS
           //pitch = map(clampedmsg, 0, 500, 35, 125); //map voltage to pitch in soundcipher
+          
+          if (foo){
+             sc.playNote(0, 0, 2.0); //silent note, relaxed eyebrows
+             timer = ms;
+             foo = false;
+             //calculating slope of the spike
+            float slope = EMGarray[0]-EMGarray[3];
+          
+            float a = EMGarray[0]-EMGarray[1];
+            float b = EMGarray[1]-EMGarray[2];
+            float c = EMGarray[2]-EMGarray[3];
+          
+            float[] ppp = {a, b, c, a+20};
+            println(ppp);
+            if(slope>100){ //if there's a large slope
+              sc.playChord(ppp, 100, 2.0);
+            }
+           }
          
         } //end if      
       } //end while
