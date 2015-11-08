@@ -16,11 +16,17 @@ float threshold1 = 8; //thresholds to distinguish btwn three notes
 float threshold2 = 100; //can be scaled during calibration
 float threshold3 = 350;
 
+float t = 0; //variables for visuals
+float velocity = 0.01;
+
 
 void setup()
 {
   String portName = Serial.list()[1]; //serial connection to Arduino
   myPort = new Serial (this, portName, 9600); 
+  
+  size(500, 500); //visuals
+  background(240, 70, 80);
 }
 
 
@@ -62,17 +68,32 @@ void draw()
              sc.playNote(60, 100, 2.0); //middle C, small eyebrow raise
              timer = ms; 
              foo = false; //flag
+             
+             background(80, int(clampedmsg/2), 80); //visuals
            } 
            else if (clampedmsg < threshold3 & clampedmsg > threshold2 & foo) {
              sc.playNote(62, 100, 2.0); //D, medium eyebrow raise
              timer = ms;
              foo = false;
+             
+             background(80, 80, int(clampedmsg/2)); //visuals
            }
            else if (clampedmsg > threshold3 & foo) {
              sc.playNote(64, 100, 2.0); //E, high eyebrow raise
              timer = ms;
              foo = false;
-           }          
+             
+             background(int(clampedmsg/2), 80, 80); //visuals
+           }
+           
+//          //CODE FOR VISUAL COMPONENT
+//          smooth();
+//          stroke (200);
+//          strokeWeight(15);
+//          float x = 200*cos(3*t+1)+width/2;
+//          float y = clampedmsg; //control the height of ball with voltage
+//          t += velocity;
+//          point(x,y);           
         } //end if      
       } //end while
     } //end try
@@ -85,15 +106,3 @@ void draw()
     }
 }  
 
-class ThreeNotes{
-  ThreeNotes(float temppitch, int tempcheck, int temptimer, boolean tempfoo, float tempthreshold1, float tempthreshold2, float tempthreshold3){
-    pitch = temppitch;
-    check = tempcheck;
-    timer = temptimer;
-    foo = tempfoo;
-    threshold1 = tempthreshold1;
-    threshold2 = tempthreshold2;
-    threshold3 = tempthreshold3;
-  }
-
-}
