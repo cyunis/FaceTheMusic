@@ -44,15 +44,17 @@ void draw()
           
           clampedmsg = Math.max(0, Math.min(480, nummsg)); //final voltages, (0, ~480)
           
-          for (int i=EMGarray.length-1; i>0;i--){
-            EMGarray[i-1]=EMGarray[i];
-          }
-          
+//          for (int i=EMGarray.length-1; i>0;i--){
+//            EMGarray[i-1]=EMGarray[i];
+//          }
+
+          EMGarray[3]=EMGarray[2];
+          EMGarray[2]=EMGarray[1];
+          EMGarray[1]=EMGarray[0];          
           EMGarray[0]=clampedmsg;
+          
           //println(EMGarray);
           
-
-
 //              float plotVar = clampedmsg;
 //              stroke(255,0,0);
 //              line(frameCount-1,prevY,frameCount, plotVar);
@@ -77,10 +79,13 @@ void draw()
             float slope = EMGarray[0]-EMGarray[3];
           
             float a = EMGarray[0]-EMGarray[1];
+            float pitcha = map(abs(a), 0, 350, 35, 125);
             float b = EMGarray[1]-EMGarray[2];
+            float pitchb = map(abs(b), 0, 350, 35, 125);
             float c = EMGarray[2]-EMGarray[3];
+            float pitchc = map(abs(c), 0, 350, 35, 125);
           
-            float[] ppp = {a, b, c, a+20};
+            float[] ppp = {pitcha, pitchb, pitchc, pitcha+20};
             println(ppp);
             if(slope>100){ //if there's a large slope
               sc.playChord(ppp, 100, 2.0);
@@ -96,21 +101,6 @@ void draw()
     {
       System.out.println("NumberFormatException: " + nfe.getMessage());
     }  
-    
-//  for (int i=0;i<EMGarray.size()+1;i++) {
-//    line(0,0, i,EMG)
-//  }
-  
-//  noFill();
-//  stroke(255,0,0);
-//  beginShape();
-//  for (int i=0;i<1000;i++) {
-//    float I = EMGarray[i];
-//    vertex(i, I);
-////    if (P.x<0)poop.remove(i);
-////    P.x--;
-//  }
-//  endShape();
 
 }  
 
