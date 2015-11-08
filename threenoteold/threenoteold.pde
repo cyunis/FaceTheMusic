@@ -39,8 +39,7 @@ void draw()
   
   try 
     {
-      
-      while (myPort.available() > 0) { //COD FOR GETTING VOLTAGES
+      while (myPort.available() > 0) { //CODE FOR GETTING VOLTAGES
         msg = myPort.readStringUntil('\n');
         if ((msg != null) && (msg != "")) {
           nummsg = Long.parseLong(msg.trim()); 
