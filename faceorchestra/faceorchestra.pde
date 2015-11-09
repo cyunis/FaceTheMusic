@@ -85,10 +85,6 @@ void draw()
               orchestrationOffset = 3;
               play(0);
             }
-            if(posslope>20 & posslope<100 & clampedmsg>threshold2){ //opening jaw
-              orchestrationOffset = 3;
-              play(0);
-            }
            }  
         } //end if      
       } //end while
