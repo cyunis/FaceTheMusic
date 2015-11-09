@@ -9,8 +9,8 @@ long[] EMGarray = new long[10]; //array for measuring spikes
 
 float[] pitches = {84, 76, 67};
 float[] insts = {ciphers[0].XYLOPHONE, ciphers[0].WOODBLOCKS, ciphers[0].PIPES, 
-                  ciphers[0].VIOLIN, ciphers[0].VIOLA, ciphers[0].CELLO,
-                  ciphers[0].SEA, ciphers[0].OCARINA, ciphers[0].DRUM};
+                  ciphers[0].CYMBAL, ciphers[0].VIOLIN, ciphers[0].VIOLIN,
+                  ciphers[0].VIOLIN, ciphers[0].VIOLIN, ciphers[0].MARIMBA};
 int orchestrationOffset = 0;
 
 int check; //variables to set note duration
