@@ -21,8 +21,6 @@ void setup()
   for (int i=0; i<EMGarray.length;i++){
     EMGarray[i]=0;
   }
-  //size(800, 700);
-  //background(0);
 }
 
 
@@ -43,10 +41,6 @@ void draw()
           nummsg = Long.parseLong(msg.trim()); 
           
           clampedmsg = Math.max(0, Math.min(480, nummsg)); //final voltages, (0, ~480)
-          
-//          for (int i=EMGarray.length-1; i>0;i--){
-//            EMGarray[i-1]=EMGarray[i];
-//          }
 
           EMGarray[3]=EMGarray[2];
           EMGarray[2]=EMGarray[1];

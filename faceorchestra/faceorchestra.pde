@@ -81,23 +81,23 @@ void draw()
             println(posslope, poslongslope, clampedmsg);
             
             //CODE FOR DIFF SOUNDS FOR DIFF GESTURES
-            if(posslope>320 & clampedmsg>threshold1){ //smiling big
+            if(posslope>320 & clampedmsg>threshold1){ //smiling big, xylophone
               orchestrationOffset = 0;
               play(0);  
             }
-            if(posslope>20 & posslope<50 & clampedmsg>threshold2 & clampedmsg<threshold3){ //raising eyebrows
+            if(posslope>20 & posslope<50 & clampedmsg>threshold2 & clampedmsg<threshold3){ //raising eyebrows, cymbal
               orchestrationOffset = 3;
               play(0);
             }
-            if(posslope>90 & clampedmsg>threshold3){ //open jaw quickly
+            if(posslope>90 & clampedmsg>threshold3){ //open jaw quickly, woodblocks
               orchestrationOffset = 0;
               play(1);
             }
-            if(posslope<20 & posslope>6 & clampedmsg<threshold4){ //puff cheeks
+            if(posslope<20 & posslope>6 & clampedmsg<threshold4){ //puff cheeks, pipes
               orchestrationOffset = 0;
               play(2);
             }
-            if(poslongslope<50 & clampedmsg>threshold3 & clampedmsg<threshold1){ //scrunch face
+            if(poslongslope<50 & clampedmsg>threshold3 & clampedmsg<threshold1){ //scrunch face, marimba
               orchestrationOffset = 6;
               play(2);
             }
