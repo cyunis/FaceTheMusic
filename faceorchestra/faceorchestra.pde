@@ -10,7 +10,7 @@ long[] EMGarray = new long[10]; //array for measuring spikes
 float[] pitches = {84, 76, 67};
 float[] insts = {ciphers[0].XYLOPHONE, ciphers[0].WOODBLOCKS, ciphers[0].PIPES, 
                   ciphers[0].VIOLIN, ciphers[0].VIOLA, ciphers[0].CELLO,
-                  ciphers[0].SEA, ciphers[0].OCARINA, ciphers[0].CHOIR};
+                  ciphers[0].SEA, ciphers[0].OCARINA, ciphers[0].DRUM};
 int orchestrationOffset = 0;
 
 int check; //variables to set note duration
@@ -19,6 +19,8 @@ boolean foo = true;
 int count = 0;
 float threshold1 = 350;
 float threshold2 = 100;
+float threshold3 = 200;
+float threshold4 = 30;
 
 void setup()
 {
@@ -72,18 +74,32 @@ void draw()
           if (foo){
             timer = ms;
             foo = false;
-            float slope = EMGarray[0]-EMGarray[3]; //calculating slope of the spike. 0-3? 0-8?
+            float slope = EMGarray[0]-EMGarray[3]; //calculating slope of the spike.
+            float longslope = EMGarray[0]-EMGarray[9];
             float posslope = abs(slope);
-            println(posslope, clampedmsg);
+            float poslongslope = abs(longslope);
+            println(posslope, poslongslope, clampedmsg);
             
             //CODE FOR DIFF SOUNDS FOR DIFF GESTURES
             if(posslope>320 & clampedmsg>threshold1){ //smiling big
               orchestrationOffset = 0;
               play(0);  
             }
-            if(posslope>20 & posslope<50 & clampedmsg>threshold2 & clampedmsg<threshold1){ //raising eyebrows
+            if(posslope>20 & posslope<50 & clampedmsg>threshold2 & clampedmsg<threshold3){ //raising eyebrows
               orchestrationOffset = 3;
               play(0);
+            }
+            if(posslope>90 & clampedmsg>threshold3){ //open jaw quickly
+              orchestrationOffset = 0;
+              play(1);
+            }
+            if(posslope<20 & posslope>6 & clampedmsg<threshold4){ //puff cheeks
+              orchestrationOffset = 0;
+              play(2);
+            }
+            if(poslongslope<50 & clampedmsg>threshold3 & clampedmsg<threshold1){ //scrunch face
+              orchestrationOffset = 6;
+              play(2);
             }
            }  
         } //end if      
