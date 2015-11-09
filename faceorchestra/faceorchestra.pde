@@ -73,15 +73,15 @@ void draw()
             timer = ms;
             foo = false;
             float slope = EMGarray[0]-EMGarray[3]; //calculating slope of the spike. 0-3? 0-8?
-            println(slope, clampedmsg);
             float posslope = abs(slope);
+            println(posslope, clampedmsg);
             
             //CODE FOR DIFF SOUNDS FOR DIFF GESTURES
-            if(posslope>100 & clampedmsg>threshold1){ //smiling big
+            if(posslope>320 & clampedmsg>threshold1){ //smiling big
               orchestrationOffset = 0;
               play(0);  
             }
-            if(posslope>20 & posslope<100 & clampedmsg>threshold2){ //raising eyebrows
+            if(posslope>20 & posslope<50 & clampedmsg>threshold2 & clampedmsg<threshold1){ //raising eyebrows
               orchestrationOffset = 3;
               play(0);
             }
